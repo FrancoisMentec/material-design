@@ -1,0 +1,248 @@
+:root {
+  --primary-color-50:  #E3F2FD;
+  --primary-color-100: #BBDEFB;
+  --primary-color-200: #90CAF9;
+  --primary-color-300: #64B5F6;
+  --primary-color-400: #42A5F5;
+  --primary-color-500: #2196F3;
+  --primary-color-600: #1E88E5;
+  --primary-color-700: #1976D2;
+  --primary-color-800: #1565C0;
+  --primary-color-900: #0D47A1;
+
+  --secondary-color-50:  #FFF3E0;
+  --secondary-color-100: #FFE0B2;
+  --secondary-color-200: #FFCC80;
+  --secondary-color-300: #FFB74D;
+  --secondary-color-400: #FFA726;
+  --secondary-color-500: #FF9800;
+  --secondary-color-600: #FB8C00;
+  --secondary-color-700: #F57C00;
+  --secondary-color-800: #EF6C00;
+  --secondary-color-900: #E65100;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* fonts */
+@font-face {
+    font-family: Roboto-Black;
+    src: url(./fonts/Roboto/Roboto-Black.ttf);
+}
+
+@font-face {
+    font-family: Roboto-BlackItalic;
+    src: url(./fonts/Roboto/Roboto-BlackItalic.ttf);
+}
+
+@font-face {
+    font-family: Roboto-Bold;
+    src: url(./fonts/Roboto/Roboto-Bold.ttf);
+}
+
+@font-face {
+    font-family: Roboto-BoldItalic;
+    src: url(./fonts/Roboto/Roboto-BoldItalic.ttf);
+}
+
+@font-face {
+    font-family: Roboto-Italic;
+    src: url(./fonts/Roboto/Roboto-Italic.ttf);
+}
+
+@font-face {
+    font-family: Roboto-Light;
+    src: url(./fonts/Roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+    font-family: Roboto-LightItalic;
+    src: url(./fonts/Roboto/Roboto-LightItalic.ttf);
+}
+
+@font-face {
+    font-family: Roboto-Medium;
+    src: url(./fonts/Roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: Roboto-MediumItalic;
+    src: url(./fonts/Roboto/Roboto-MediumItalic.ttf);
+}
+
+@font-face {
+    font-family: Roboto-Regular;
+    src: url(./fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: Roboto-Thin;
+    src: url(./fonts/Roboto/Roboto-Thin.ttf);
+}
+
+@font-face {
+    font-family: Roboto-ThinItalic;
+    src: url(./fonts/Roboto/Roboto-ThinItalic.ttf);
+}
+
+@font-face {
+  font-family: Material-Icons;
+  font-style: normal;
+  font-weight: 400;
+  src: url(./fonts/MaterialIcons-Regular.ttf);
+}
+
+.material-icons {
+  font-family: Material-Icons;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+/* Typography */
+* {
+  font-weight: normal !important; /* Never use font-weight use different fonts instead */
+}
+
+h1 {
+  font-family: Roboto-Light;
+  font-size: 112px;
+}
+
+h2 {
+  font-family: Roboto-Regular;
+  font-size: 56px;
+}
+
+h3 {
+  font-family: Roboto-Regular;
+  font-size: 45px;
+}
+
+h4 {
+  font-family: Roboto-Regular;
+  font-size: 34px;
+}
+
+h5 {
+  font-family: Roboto-Regular;
+  font-size: 24px;
+}
+
+h6 {
+  font-family: Roboto-Medium;
+  font-size: 20px;
+}
+
+/* html, body */
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Roboto-Regular;
+  font-size: 14px;
+}
+
+/**********************************************************************************************************************************************************/
+/* Button */
+button, .button {
+  transition: 0.2s;
+  min-width: 64px;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 16px 0 16px;
+  margin: 8px;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  font-family: Roboto-Medium;
+  font-size: 13px;
+  color: var(--primary-color-500);
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.12), 0px 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+button:hover, .button:hover {
+  background-color: rgb(230,230,230);
+}
+
+button:active, .button:active {
+  transition: none;
+  background-color: rgb(200,200,200);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12), 0px 3px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* primary button */
+button.primary, .button.primary {
+  color: white;
+  background-color: var(--primary-color-500);
+}
+
+button.primary:hover, .button.primary:hover {
+  background-color: var(--primary-color-400);
+}
+
+button.primary:active, .button.primary:active {
+  background-color: var(--primary-color-600);
+}
+
+/* secondary button */
+button.secondary, .button.secondary {
+  color: white;
+  background-color: var(--secondary-color-500);
+}
+
+button.secondary:hover, .button.secondary:hover {
+  background-color: var(--secondary-color-400);
+}
+
+button.secondary:active, .button.secondary:active {
+  background-color: var(--secondary-color-600);
+}
+
+/* flat button */
+button.flat, .button.flat {
+  background-color: transparent;
+  color: var(--primary-color-500);
+  box-shadow: none;
+}
+
+button.flat:hover, .button.flat:hover {
+  background-color: rgba(0,0,0,0.08);
+}
+
+button.flat:active, .button.flat:active {
+  background-color: rgba(0,0,0,0.2);
+}
+
+/**********************************************************************************************************************************************************/
+/* TextField */
+text-field {
+  display: inline-block;
+  position: relative;
+}
+
+/* rest is in the shadow */
