@@ -235,7 +235,7 @@
 
   // Material design
   class MaterialDesign {
-    constructor (primaryColor = 'blue', secondaryColor = 'orange') {
+    constructor (primaryColor = 'blue', secondaryColor = 'orange', errorColor = 'red') {
       this.styleSheet = null
       for (var i = 0, li = document.styleSheets.length; i < li; i++) {
         if (document.styleSheets[i].href.endsWith('material-design.css')) {
@@ -249,6 +249,7 @@
 
       this.primaryColor = primaryColor
       this.secondaryColor = secondaryColor
+      this.errorColor = errorColor
     }
 
     get primaryColor () {
@@ -267,6 +268,15 @@
     set secondaryColor (value) {
       this.setColor('secondary-color', value)
       this._secondaryColor = value
+    }
+
+    get errorColor () {
+      return this._errorColor
+    }
+
+    set errorColor (value) {
+      this.setColor('error-color', value)
+      this._errorColor = value
     }
 
     setColor (name, value) {
@@ -294,7 +304,7 @@
           width: 100%;
           padding: 24px 0 8px 0;
           border: none;
-          border-bottom: 1px solid #9E9E9E; /* gray 500 */
+          border-bottom: 2px solid #9E9E9E; /* gray 500 */
           background-color: transparent;
           font-size: 16px;
           outline: none;
@@ -323,10 +333,14 @@
           color: var(--secondary-color-500);
         }
 
+        .error.focus .label {
+          color: var(--error-color-500);
+        }
+
         .border {
           transition: 0.2s;
           position: absolute;
-          top: 49px;
+          top: 50px;
           left: 50%;
           transform: translateX(-50%);
           width: 0;
@@ -338,8 +352,22 @@
           background-color: var(--secondary-color-500);
         }
 
+        .error .border {
+          background-color: var(--error-color-500);
+        }
+
         .focus .border {
           width: 100%;
+        }
+
+        .message {
+          padding-top: 8px;
+          color: #9E9E9E; /* gray 500 */
+          font-size: 12px;
+        }
+
+        .error .message {
+          color: var(--error-color-500);
         }
       `
       this.shadow.appendChild(this._style)
@@ -352,25 +380,33 @@
       this.wrap.appendChild(this._label)
 
       this.input = document.createElement('input')
+      this.input.type = 'text'
       this.input.addEventListener('focus', function () {
         self.wrap.classList.add('focus')
       })
       this.input.addEventListener('focusout', function () {
         self.wrap.classList.remove('focus')
       })
-      this.input.addEventListener('keyup', function () {
+      this.input.addEventListener('keyup', function (e) {
         if (self.value.length > 0) self.wrap.classList.add('notEmpty')
         else self.wrap.classList.remove('notEmpty')
+        if (e.keyCode == 13) {
+          self.input.dispatchEvent(new Event('enter'))
+        }
       })
       this.wrap.appendChild(this.input)
 
       this.border = document.createElement('div')
       this.border.className = 'border'
       this.wrap.appendChild(this.border)
+
+      this._message = document.createElement('div')
+      this._message.className = 'message'
+      this.wrap.appendChild(this._message)
     }
 
     static get observedAttributes () {
-      return ['label', 'type', 'class']
+      return ['label', 'type', 'class', 'message']
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
@@ -380,6 +416,8 @@
         this.input.type = newValue
       } else if (name === 'class') {
         this.wrap.className = newValue
+      } else if (name === 'message') {
+        this._message.innerHTML = newValue
       }
     }
 
@@ -397,6 +435,14 @@
 
     set value (value) {
       this.input.value = value
+    }
+
+    get message () {
+      return this.getAttribute('message')
+    }
+
+    set message (value) {
+      this.setAttribute('message', value)
     }
 
     addEventListener (name, listener) {
