@@ -366,7 +366,7 @@
         }
 
         .focus .label {
-          color: var(--primary-color-500);
+          color: var(--primary-color-500) !important; /* override dark */
         }
 
         .secondary.focus .label {
