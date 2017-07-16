@@ -328,7 +328,6 @@
   class TextField extends MaterialDesignElement {
     constructor () {
       super()
-      var self = this
 
       this._style.innerHTML = `
         input {
@@ -421,17 +420,16 @@
 
       this.input = document.createElement('input')
       this.input.type = 'text'
-      this.input.addEventListener('focus', function () {
-        self.wrap.classList.add('focus')
+      this.input.addEventListener('focus', () => {
+        this.wrap.classList.add('focus')
       })
-      this.input.addEventListener('focusout', function () {
-        self.wrap.classList.remove('focus')
+      this.input.addEventListener('focusout', () => {
+        this.wrap.classList.remove('focus')
       })
-      this.input.addEventListener('keyup', function (e) {
-        if (self.value.length > 0) self.wrap.classList.add('notEmpty')
-        else self.wrap.classList.remove('notEmpty')
+      this.input.addEventListener('keyup', e => {
+        this.valueUpdated()
         if (e.keyCode == 13) {
-          self.input.dispatchEvent(new Event('enter'))
+          this.input.dispatchEvent(new Event('enter'))
         }
       })
       this.wrap.appendChild(this.input)
@@ -474,6 +472,12 @@
 
     set value (value) {
       this.input.value = value
+      this.valueUpdated()
+    }
+
+    valueUpdated () {
+      if (this.value.length > 0) this.wrap.classList.add('notEmpty')
+      else this.wrap.classList.remove('notEmpty')
     }
 
     get message () {

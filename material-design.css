@@ -154,6 +154,10 @@ h6 {
   font-size: 20px;
 }
 
+.text-center {
+  text-align: center;
+}
+
 /* html, body */
 html, body {
   width: 100%;
