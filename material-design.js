@@ -289,25 +289,61 @@
   }
 
   /**********************************************************************************************************************************************************
+   * Elements
+   */
+  class MaterialDesignElement extends HTMLElement {
+    constructor () {
+      super()
+      this.shadow = this.attachShadow({mode: 'open'})
+      this._style = document.createElement('style')
+      this.shadow.appendChild(this._style)
+      this.wrap = document.createElement('div')
+      this.shadow.appendChild(this.wrap)
+    }
+
+    static get observedAttributes () {
+      return ['class', 'parentElement']
+    }
+
+    attributeChangedCallback (name, oldValue, newValue) {
+      if (name === 'class') {
+        if (oldValue) {
+          oldValue = oldValue.split(' ')
+          for (var i = 0; i < oldValue.length; i++) {
+            this.wrap.classList.remove(oldValue[i])
+          }
+        }
+        if (newValue) {
+          newValue = newValue.split(' ')
+          for (var i = 0; i < newValue.length; i++) {
+            this.wrap.classList.add(newValue[i])
+          }
+        }
+      }
+    }
+  }
+  /**********************************************************************************************************************************************************
    * Text field
    */
-  class TextField extends HTMLElement {
+  class TextField extends MaterialDesignElement {
     constructor () {
       super()
       var self = this
 
-      this.shadow = this.attachShadow({mode: 'open'})
-
-      this._style = document.createElement('style')
       this._style.innerHTML = `
         input {
           width: 100%;
           padding: 24px 0 8px 0;
           border: none;
-          border-bottom: 2px solid #9E9E9E; /* gray 500 */
+          border-bottom: 2px solid #BDBDBD; /* gray 400 */
           background-color: transparent;
           font-size: 16px;
           outline: none;
+        }
+
+        .dark input {
+          border-color: #E0E0E0; /* gray 300 */
+          color: white;
         }
 
         .label {
@@ -318,6 +354,10 @@
           color: #9E9E9E; /* gray 500 */
           font-size: 16px;
           pointer-events: none;
+        }
+
+        .dark .label {
+          color: #E0E0E0; /* gray 300 */
         }
 
         .focus .label, .notEmpty .label {
@@ -366,14 +406,14 @@
           font-size: 12px;
         }
 
+        .dark .label {
+          color: #E0E0E0; /* gray 300 */
+        }
+
         .error .message {
           color: var(--error-color-500);
         }
       `
-      this.shadow.appendChild(this._style)
-
-      this.wrap = document.createElement('div')
-      this.shadow.appendChild(this.wrap)
 
       this._label = document.createElement('span')
       this._label.className = 'label'
@@ -406,16 +446,15 @@
     }
 
     static get observedAttributes () {
-      return ['label', 'type', 'class', 'message']
+      return super.observedAttributes.concat(['label', 'type', 'message'])
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
+      super.attributeChangedCallback(name, oldValue, newValue)
       if (name === 'label') {
         this._label.innerHTML = newValue
       } else if (name === 'type') {
         this.input.type = newValue
-      } else if (name === 'class') {
-        this.wrap.className = newValue
       } else if (name === 'message') {
         this._message.innerHTML = newValue
       }
