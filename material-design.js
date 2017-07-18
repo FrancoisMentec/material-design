@@ -379,7 +379,7 @@
         .border {
           transition: 0.2s;
           position: absolute;
-          top: 50px;
+          top: 49px;
           left: 50%;
           transform: translateX(-50%);
           width: 0;
