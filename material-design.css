@@ -253,4 +253,93 @@ text-field {
   position: relative;
 }
 
+text-field input {
+  width: 100%;
+  padding: 24px 0 8px 0;
+  border: none;
+  border-bottom: 2px solid #BDBDBD; /* gray 400 */
+  background-color: transparent;
+  font-size: 16px;
+  outline: none;
+}
+
+.dark text-field input {
+  border-color: #E0E0E0; /* gray 300 */
+  color: white;
+}
+
+text-field .label {
+  transition: 0.2s;
+  position: absolute;
+  left: 0;
+  top: 24px;
+  color: #9E9E9E; /* gray 500 */
+  font-size: 16px;
+  pointer-events: none;
+}
+
+text-field .dark .label {
+  color: #E0E0E0; /* gray 300 */
+}
+
+text-field .focus .label, text-field .notEmpty .label {
+  top: 8px;
+  font-size: 12px;
+}
+
+text-field .focus .label {
+  color: var(--primary-color-500) !important; /* override dark */
+}
+
+text-field.secondary .focus .label {
+  color: var(--secondary-color-500) !important; /* override dark */
+}
+
+text-field.error .focus .label {
+  color: var(--error-color-500) !important; /* override dark */
+}
+
+text-field .border {
+  transition: 0.2s;
+  position: absolute;
+  top: 49px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color-500);
+}
+
+text-field.secondary .border {
+  background-color: var(--secondary-color-500);
+}
+
+text-field.error .border {
+  background-color: var(--error-color-500);
+}
+
+text-field .focus .border {
+  width: 100%;
+}
+
+text-field .message {
+  padding-top: 8px;
+  color: #9E9E9E; /* gray 500 */
+  font-size: 12px;
+}
+
+.dark text-field .label {
+  color: #E0E0E0; /* gray 300 */
+}
+
+text-field.error .message {
+  color: var(--error-color-500);
+}
+
 /* rest is in the shadow */
+
+/**********************************************************************************************************************************************************/
+/* ScrollArea */
+scroll-area {
+  display: block;
+}

@@ -294,125 +294,21 @@
   class MaterialDesignElement extends HTMLElement {
     constructor () {
       super()
-      this.shadow = this.attachShadow({mode: 'open'})
-      this._style = document.createElement('style')
-      this.shadow.appendChild(this._style)
       this.wrap = document.createElement('div')
-      this.shadow.appendChild(this.wrap)
     }
 
-    static get observedAttributes () {
-      return ['class', 'parentElement']
-    }
-
-    attributeChangedCallback (name, oldValue, newValue) {
-      if (name === 'class') {
-        if (oldValue) {
-          oldValue = oldValue.split(' ')
-          for (var i = 0; i < oldValue.length; i++) {
-            this.wrap.classList.remove(oldValue[i])
-          }
-        }
-        if (newValue) {
-          newValue = newValue.split(' ')
-          for (var i = 0; i < newValue.length; i++) {
-            this.wrap.classList.add(newValue[i])
-          }
-        }
-      }
+    connectedCallback () {
+      while (this.firstChild) this.removeChild(this.firstChild)
+      this.appendChild(this.wrap)
     }
   }
+
   /**********************************************************************************************************************************************************
    * Text field
    */
   class TextField extends MaterialDesignElement {
     constructor () {
       super()
-
-      this._style.innerHTML = `
-        input {
-          width: 100%;
-          padding: 24px 0 8px 0;
-          border: none;
-          border-bottom: 2px solid #BDBDBD; /* gray 400 */
-          background-color: transparent;
-          font-size: 16px;
-          outline: none;
-        }
-
-        .dark input {
-          border-color: #E0E0E0; /* gray 300 */
-          color: white;
-        }
-
-        .label {
-          transition: 0.2s;
-          position: absolute;
-          left: 0;
-          top: 24px;
-          color: #9E9E9E; /* gray 500 */
-          font-size: 16px;
-          pointer-events: none;
-        }
-
-        .dark .label {
-          color: #E0E0E0; /* gray 300 */
-        }
-
-        .focus .label, .notEmpty .label {
-          top: 8px;
-          font-size: 12px;
-        }
-
-        .focus .label {
-          color: var(--primary-color-500) !important; /* override dark */
-        }
-
-        .secondary.focus .label {
-          color: var(--secondary-color-500) !important; /* override dark */
-        }
-
-        .error.focus .label {
-          color: var(--error-color-500) !important; /* override dark */
-        }
-
-        .border {
-          transition: 0.2s;
-          position: absolute;
-          top: 49px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 0;
-          height: 2px;
-          background-color: var(--primary-color-500);
-        }
-
-        .secondary .border {
-          background-color: var(--secondary-color-500);
-        }
-
-        .error .border {
-          background-color: var(--error-color-500);
-        }
-
-        .focus .border {
-          width: 100%;
-        }
-
-        .message {
-          padding-top: 8px;
-          color: #9E9E9E; /* gray 500 */
-          font-size: 12px;
-        }
-
-        .dark .label {
-          color: #E0E0E0; /* gray 300 */
-        }
-
-        .error .message {
-          color: var(--error-color-500);
-        }
-      `
 
       this._label = document.createElement('span')
       this._label.className = 'label'
@@ -444,11 +340,10 @@
     }
 
     static get observedAttributes () {
-      return super.observedAttributes.concat(['label', 'type', 'message'])
+      return ['label', 'type', 'message']
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-      super.attributeChangedCallback(name, oldValue, newValue)
       if (name === 'label') {
         this._label.innerHTML = newValue
       } else if (name === 'type') {
@@ -494,6 +389,28 @@
   }
 
   customElements.define('text-field', TextField)
+
+  /**********************************************************************************************************************************************************
+   * Scroll area
+   */
+  class ScrollArea extends MaterialDesignElement {
+    constructor () {
+      super()
+    }
+
+    static get observedAttributes () {
+      return ['innerHTML']
+    }
+
+    attributeChangedCallback (name, oldValue, newValue) {
+      console.log(name)
+      if (name === 'innerHTML') {
+        console.log(newValue)
+      }
+    }
+  }
+
+  customElements.define('scroll-area', ScrollArea)
 
   window.materialDesign = new MaterialDesign()
 })()
