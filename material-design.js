@@ -369,11 +369,11 @@
         }
 
         .secondary.focus .label {
-          color: var(--secondary-color-500);
+          color: var(--secondary-color-500) !important; /* override dark */
         }
 
         .error.focus .label {
-          color: var(--error-color-500);
+          color: var(--error-color-500) !important; /* override dark */
         }
 
         .border {

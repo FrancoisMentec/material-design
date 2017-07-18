@@ -234,6 +234,10 @@ button.flat, .button.flat {
   box-shadow: none;
 }
 
+button.flat.secondary, .button.flat.secondary {
+  color: var(--secondary-color-500);
+}
+
 button.flat:hover, .button.flat:hover {
   background-color: rgba(0,0,0,0.08);
 }
