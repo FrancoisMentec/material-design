@@ -271,9 +271,32 @@ text-field input {
   outline: none;
 }
 
+@-webkit-keyframes autofill {
+  to {
+    background: transparent;
+  }
+}
+
+text-field input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
 .dark text-field input {
   border-color: #E0E0E0; /* gray 300 */
   color: white;
+}
+
+@-webkit-keyframes autofillDark {
+  to {
+    color: white;
+    background: transparent;
+  }
+}
+
+.dark text-field input:-webkit-autofill {
+  -webkit-animation-name: autofillDark;
+  -webkit-animation-fill-mode: both;
 }
 
 text-field .label {

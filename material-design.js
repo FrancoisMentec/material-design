@@ -330,6 +330,9 @@
       this.input.addEventListener('focusout', () => {
         this.wrap.classList.remove('focus')
       })
+      this.input.addEventListener('change', () => {
+        this.valueUpdated()
+      })
       this.input.addEventListener('keyup', e => {
         this.valueUpdated()
         if (e.keyCode == 13) {
