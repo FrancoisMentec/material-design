@@ -358,13 +358,13 @@ scroll-area .shadow {
   top: 0;
   left: 0;
   right: 0;
-  height: 14px;
+  height: 5px;
   background-color: transparent;
   pointer-events: none;
 }
 
 scroll-area .scrolled .shadow {
-  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
 }
 
 scroll-area .scrollWrap {
