@@ -3,6 +3,11 @@
     <title>Material Design</title>
     <link rel="stylesheet" href="./material-design.css">
     <script src="material-design.js"></script>
+    <style>
+      .dark {
+        background-color: black;
+      }
+    </style>
   </head>
   <body style="padding: 5px">
     <h1>Material Design</h1>
@@ -17,6 +22,9 @@
     <button class="secondary">Secondary</button>
     <button class="flat">Flat</button>
     <button class="flat secondary">Flat secondary</button>
+    <div class="dark">
+      <button class="flat">Dark Flat</button>
+    </div>
 
     <h4>TextField</h4>
     <text-field label="Default"></text-field>
@@ -26,9 +34,12 @@
     <text-field label="Message" message="Hey I'm a message :-)"></text-field>
     <br>
     <text-field class="error" label="Error" message="Hey there is an error :-("></text-field>
+    <div class="dark">
+      <text-field label="Dark default"></text-field>
+    </div>
 
     <h4>Scroll area</h4>
-    <scroll-area style="height: 100px;">
+    <scroll-area style="height: 300px;">
       <ul>
         <li>Yolo</li>
         <li>Yolo</li>

@@ -239,11 +239,19 @@ button.flat.secondary, .button.flat.secondary {
 }
 
 button.flat:hover, .button.flat:hover {
-  background-color: rgba(0,0,0,0.08);
+  background-color: rgba(153,153,153,0.2);
+}
+
+.dark button.flat:hover, .dark .button.flat:hover {
+  background-color: rgba(204,204,204,0.18);
 }
 
 button.flat:active, .button.flat:active {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(153,153,153,0.4);
+}
+
+.dark button.flat:active, .dark .button.flat:active {
+  background-color: rgba(204,204,204,0.25);
 }
 
 /**********************************************************************************************************************************************************/
@@ -342,4 +350,25 @@ text-field.error .message {
 /* ScrollArea */
 scroll-area {
   display: block;
+}
+
+scroll-area .shadow {
+  transition: 0.2s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+scroll-area .scrolled .shadow {
+  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+}
+
+scroll-area .scrollWrap {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }

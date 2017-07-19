@@ -298,8 +298,16 @@
     }
 
     connectedCallback () {
-      while (this.firstChild) this.removeChild(this.firstChild)
-      this.appendChild(this.wrap)
+      while (super.firstChild) super.removeChild(super.firstChild)
+      super.appendChild(this.wrap)
+
+      if (this._observer) {
+        this._observer.observe(this, {
+          childList: true,
+          characterData: true,
+          subtree: true
+        })
+      }
     }
   }
 
@@ -396,17 +404,48 @@
   class ScrollArea extends MaterialDesignElement {
     constructor () {
       super()
+
+      this.wrap.style.position = 'relative'
+
+      this.shadow = document.createElement('div')
+      this.shadow.className = 'shadow'
+      this.wrap.appendChild(this.shadow)
+
+      this.scrollWrap = document.createElement('div')
+      this.scrollWrap.className = 'scrollWrap'
+      this.scrollWrap.addEventListener('scroll', () => {
+        if (this.scrollWrap.scrollTop > 0) this.wrap.classList.add('scrolled')
+        else this.wrap.classList.remove('scrolled')
+      })
+      this.wrap.appendChild(this.scrollWrap)
+
+      this._observer = new MutationObserver(() => {
+        while (super.childNodes.length > 1) {
+          var e = super.childNodes[1]
+          super.removeChild(e)
+          this.appendChild(e)
+        }
+      })
     }
 
-    static get observedAttributes () {
-      return ['innerHTML']
+    get innerHTML () {
+      return this.scrollWrap.innerHTML
     }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-      console.log(name)
-      if (name === 'innerHTML') {
-        console.log(newValue)
-      }
+    set innerHTML (value) {
+      this.scrollWrap.innerHTML = value
+    }
+
+    get firstChild () {
+      return this.scrollWrap.firstChild
+    }
+
+    appendChild (e) {
+      this.scrollWrap.appendChild(e)
+    }
+
+    removeChild (e) {
+      this.scrollWrap.removeChild(e)
     }
   }
 
