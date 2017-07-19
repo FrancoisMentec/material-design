@@ -1,6 +1,6 @@
 {
   "name": "material-design-fm",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A material design library using custom elements and css var, only supported by chrome.",
   "main": "index.js",
   "scripts": {
